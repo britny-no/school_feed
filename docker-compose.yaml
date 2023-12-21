@@ -74,8 +74,8 @@ services:
       - bash
       - -c
       - |
-        /school_feed/wait-for-it.sh rabbitmq:5672 -t 10
-        node ./dist/server.js
+        /pub_server/wait-for-it.sh rabbitmq:5672 -t 10
+        node dist/server.js
 
   rabbitmq:
     networks:

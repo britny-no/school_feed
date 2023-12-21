@@ -75,7 +75,7 @@ services:
       - bash
       - -c
       - |
-        /school_feed/wait-for-it.sh rabbitmq:5672 -t 10
+        /pub_server/wait-for-it.sh rabbitmq:5672 -t 10
         ts-node ./src/server.ts
 
   rabbitmq:
