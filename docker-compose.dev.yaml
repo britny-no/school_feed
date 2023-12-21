@@ -1,0 +1,74 @@
+version: "3.5"
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    env_file:
+      - docker.env
+    environment:
+      TZ: Asia/Seoul
+      PGTZ: Asia/Seoul
+      PGDATA: /data/postgres
+    volumes:
+      - ./postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    env_file:
+      - docker.env
+    environment:
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  app:
+    networks:
+      - postgres
+    depends_on:
+      - postgres
+      - rabbitmq
+    build:
+      context: ./school_feed
+      dockerfile: Dockerfile.dev
+    container_name: nest-app
+    restart: always
+    ports:
+      - "3000:3000" # Adjust the port as needed
+    volumes:
+      - ./school_feed:/school_feed
+      - /school_feed/node_modules/
+    command:
+      - bash
+      - -c
+      - |
+        /school_feed/wait-for-it.sh postgres_container:5432 -t 10
+        npm run start:debug
+
+  rabbitmq:
+    networks:
+      - postgres
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    env_file:
+      - docker.env
+
+networks:
+  postgres:
+    driver: bridge
