@@ -43,6 +43,8 @@ services:
     build:
       context: ./school_feed
       dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
     container_name: nest-app
     restart: always
     ports:
@@ -56,6 +58,24 @@ services:
       - |
         /school_feed/wait-for-it.sh postgres_container:5432 -t 10
         npm run start:prod
+  pub-server:
+    networks:
+      - postgres
+    depends_on:
+      - rabbitmq
+    build:
+      context: ./pub_server
+      dockerfile: Dockerfile
+    container_name: pub-app
+    environment:
+      NODE_ENV: production
+    restart: always
+    command:
+      - bash
+      - -c
+      - |
+        /pub_server/wait-for-it.sh rabbitmq:5672 -t 10
+        node dist/server.js
 
   rabbitmq:
     networks:
