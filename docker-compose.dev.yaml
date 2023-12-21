@@ -44,6 +44,8 @@ services:
       context: ./school_feed
       dockerfile: Dockerfile.dev
     container_name: nest-app
+    environment:
+      NODE_ENV: develop
     restart: always
     ports:
       - "3000:3000" # Adjust the port as needed
@@ -56,6 +58,25 @@ services:
       - |
         /school_feed/wait-for-it.sh postgres_container:5432 -t 10
         npm run start:debug
+
+  pub-server:
+    networks:
+      - postgres
+    depends_on:
+      - rabbitmq
+    build:
+      context: ./pub_server
+      dockerfile: Dockerfile.dev
+    container_name: pub-app
+    environment:
+      NODE_ENV: develop
+    restart: always
+    command:
+      - bash
+      - -c
+      - |
+        /school_feed/wait-for-it.sh rabbitmq:5672 -t 10
+        ts-node ./src/server.ts
 
   rabbitmq:
     networks:

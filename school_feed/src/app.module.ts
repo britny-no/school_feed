@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { AdminModule } from './admin/admin.module';
 import { StudentModule } from './student/student.module';
 import { NewsModule } from './news/news.module';
+import { RmqModule } from './rmq/rmq.module';
+import { PageModule } from './page/page.module';
+
+import { WinstonConfig } from 'config/winston.util';
 
 import {
   EnvConfig,
@@ -12,7 +16,16 @@ import {
 } from 'config/index';
 
 @Module({
-  imports: [EnvConfig, DbConfig, AdminModule, StudentModule, NewsModule],
+  imports: [
+    EnvConfig,
+    DbConfig,
+    WinstonConfig,
+    AdminModule,
+    StudentModule,
+    NewsModule,
+    PageModule,
+    RmqModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
