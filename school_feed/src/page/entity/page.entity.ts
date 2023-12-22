@@ -8,13 +8,16 @@ import {
 
 @Entity({ name: 'PAGE' })
 export class PageEntity extends BaseEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', name: 'page_index' })
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+    name: 'page_index',
+  })
   pageIndex: string;
 
-  @Column({ type: 'text', nullable: false, name: 'page_name' })
+  @Column({ type: 'text', name: 'page_name' })
   pageName: string;
 
-  @Column({ type: 'text', nullable: false, name: 'school_name' })
+  @Column({ type: 'text', name: 'school_name' })
   schoolName: string;
 
   @Column({ type: 'text', name: 'short_description' })
