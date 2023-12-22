@@ -51,7 +51,7 @@ services:
       - "3000:3000" # Adjust the port as needed
     volumes:
       - ./school_feed:/school_feed
-      - /school_feed/node_modules/
+      # - /school_feed/node_modules/
     command:
       - bash
       - -c
