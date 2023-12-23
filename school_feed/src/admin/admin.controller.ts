@@ -28,9 +28,9 @@ export class AdminController {
   createPage(@Body() body: createPageReqDto): string {
     // this.RmqService.sendMsg('123123');
     try {
-      this.pageService.createPage(body);
+      console.log(body);
+      // this.pageService.createPage(body);
     } catch (err) {}
-    console.log(body);
     return 'success';
   }
 }

@@ -32,6 +32,7 @@ export const DbConfig = TypeOrmModule.forRootAsync({
     ],
     // subscribers: [UserSubscriber],
     // entities: [join(__dirname, "/**/*.entity.js")],
-    // synchronize: true,
+    synchronize: false,
+    migrationsRun: false,
   }),
 });

@@ -15,6 +15,7 @@ export class PageService {
   // custom repository 지양으로 서비스화
   createPage(data: createPageInterface) {
     try {
+      console.log(data);
       return this.pageRepository.save(data);
     } catch (err) {
       console.log(err);
