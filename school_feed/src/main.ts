@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 
 import { ValidationFailException } from 'exception/validationFail.exception';
-
 import { setupSwagger } from 'util/swagger.util';
 
 async function bootstrap() {

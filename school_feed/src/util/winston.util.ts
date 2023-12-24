@@ -24,7 +24,7 @@ export const WinstonConfig = WinstonModule.forRoot({
     }),
 
     // // info, warn, error 로그는 파일로 관리
-    new winstonDaily(dailyOptions('info')),
+    // new winstonDaily(dailyOptions('info')),
     // new winstonDaily(dailyOptions("warn")),
     new winstonDaily(dailyOptions('error')),
   ],
@@ -36,7 +36,7 @@ export const WinstonConfig = WinstonModule.forRoot({
         winston.format.simple()
       : winston.format.combine(
           winston.format.timestamp(),
-          utilities.format.nestLike('Project Name', {
+          utilities.format.nestLike('SCHOOL_FEED', {
             prettyPrint: true, // nest에서 제공하는 옵션. 로그 가독성을 높여줌
           }),
         ),

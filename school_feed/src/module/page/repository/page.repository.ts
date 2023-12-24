@@ -26,7 +26,6 @@ export class PageRepository extends Repository<PageEntity> {
       };
     } catch (err) {
       switch (err.code) {
-        // 중복 에러
         case '23505':
           throw new CommonErrorException(
             {
