@@ -1,11 +1,11 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AdminEntity } from 'admin/entity/admin.entity';
-import { PageEntity } from 'page/entity/page.entity';
-import { NewsEntity } from 'news/entity/news.entity';
-import { NewsFeedEntity } from 'news/entity/news-feed.entity';
-import { StudentEntity } from 'student/entity/student.entity';
-import { SubscribeEntity } from 'student/entity/subscribe.entity';
+import { AdminEntity } from 'module/admin/entity/admin.entity';
+import { PageEntity } from 'module/page/entity/page.entity';
+import { NewsEntity } from 'module/news/entity/news.entity';
+import { NewsFeedEntity } from 'module/news/entity/news-feed.entity';
+import { StudentEntity } from 'module/student/entity/student.entity';
+import { SubscribeEntity } from 'module/student/entity/subscribe.entity';
 
 export const EnvConfig = ConfigModule.forRoot({
   cache: true,
@@ -30,8 +30,6 @@ export const DbConfig = TypeOrmModule.forRootAsync({
       StudentEntity,
       SubscribeEntity,
     ],
-    // subscribers: [UserSubscriber],
-    // entities: [join(__dirname, "/**/*.entity.js")],
     synchronize: false,
     migrationsRun: false,
   }),

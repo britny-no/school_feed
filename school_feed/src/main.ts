@@ -1,9 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ValidationPipe } from '@nestjs/common';
-import { setupSwagger } from 'config/swagger.util';
-import { SerializeInterceptor } from 'serialize-interceptor';
+import {
+  BadRequestException,
+  ValidationPipe,
+  ValidationError,
+} from '@nestjs/common';
+
+import { ValidationFailException } from 'exception/validationFail.exception';
+
+import { setupSwagger } from 'util/swagger.util';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +23,9 @@ async function bootstrap() {
     new ValidationPipe({
       transform: true,
       whitelist: true,
+      exceptionFactory: (validationErrors: ValidationError[] = []) => {
+        return new ValidationFailException(validationErrors);
+      },
     }),
   );
 
