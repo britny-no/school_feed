@@ -8,7 +8,7 @@ import {
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston/dist/winston.constants';
 import { Logger as WinstonLogger } from 'winston';
 
-import { QueryErrorException } from 'exception/queryError.exception';
+import { QueryErrorException } from '@App/exception/queryError.exception';
 import { Request, Response } from 'express';
 
 interface HttpExceptionForQuery extends HttpException {

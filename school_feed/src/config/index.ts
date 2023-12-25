@@ -1,11 +1,11 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AdminEntity } from 'module/admin/entity/admin.entity';
-import { PageEntity } from 'module/page/entity/page.entity';
-import { NewsEntity } from 'module/news/entity/news.entity';
-import { NewsFeedEntity } from 'module/news/entity/news-feed.entity';
-import { StudentEntity } from 'module/student/entity/student.entity';
-import { SubscribeEntity } from 'module/student/entity/subscribe.entity';
+import { AdminEntity } from '@App/module/admin/entity/admin.entity';
+import { PageEntity } from '@App/module/page/entity/page.entity';
+import { NewsEntity } from '@App/module/news/entity/news.entity';
+import { NewsFeedEntity } from '@App/module/news/entity/news-feed.entity';
+import { StudentEntity } from '@App/module/student/entity/student.entity';
+import { SubscribeEntity } from '@App/module/student/entity/subscribe.entity';
 
 export const EnvConfig = ConfigModule.forRoot({
   cache: true,

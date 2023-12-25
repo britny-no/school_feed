@@ -7,13 +7,13 @@ import { NewsModule } from './module/news/news.module';
 import { RmqModule } from './module/rmq/rmq.module';
 import { PageModule } from './module/page/page.module';
 
-import { WinstonConfig } from 'util/winston.util';
+import { WinstonConfig } from '@App/util/winston.util';
 
 import {
   EnvConfig,
   DbConfig,
   // RedisConfig,
-} from 'config/index';
+} from '@App/config/index';
 
 @Module({
   imports: [

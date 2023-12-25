@@ -5,7 +5,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 
-import { ValidationFailException } from 'exception/validationFail.exception';
+import { ValidationFailException } from '@App/exception/validationFail.exception';
 import { Response, Request } from 'express';
 
 @Catch(ValidationFailException)

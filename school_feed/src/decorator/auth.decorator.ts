@@ -1,10 +1,10 @@
 import { CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 
-import { ErrorCodeEnum } from 'enum/errorCode.enum';
-import { DetailCodeEnum } from 'enum/detailCode.enum';
-import { CommonErrorException } from 'exception/commonError.exception';
-import { QueryErrorException } from 'exception/queryError.exception';
+import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
+import { DetailCodeEnum } from '@App/enum/detailCode.enum';
+import { CommonErrorException } from '@App/exception/commonError.exception';
+import { QueryErrorException } from '@App/exception/queryError.exception';
 
 export class AdminAuthGuard implements CanActivate {
   canActivate(

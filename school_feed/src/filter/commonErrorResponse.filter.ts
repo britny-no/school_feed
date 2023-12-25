@@ -8,7 +8,7 @@ import {
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston/dist/winston.constants';
 import { Logger as WinstonLogger } from 'winston';
 
-import { CommonErrorException } from 'exception/commonError.exception';
+import { CommonErrorException } from '@App/exception/commonError.exception';
 import { Request, Response } from 'express';
 
 @Catch(CommonErrorException)

@@ -17,18 +17,18 @@ import {
   getSchemaPath,
 } from '@nestjs/swagger';
 
-import { AdminAuthGuard } from 'decorator/auth.decorator';
+import { AdminAuthGuard } from '@App/decorator/auth.decorator';
 import { CreatePageReqDto } from './dto/request/createPage.dto';
 import { CreatePageResDto } from './dto/response/createPage.dto';
-import { AdminService } from 'module/admin/admin.service';
+import { AdminService } from '@App/module/admin/admin.service';
 
 import { ControllerResult } from '../../interface/index.interface';
 
-import { ApiCommonResponse } from 'decorator/apiCommon.decorator';
-import { ResponseFormatInterceptor } from 'interceptor/responseFormat.interceptor';
-import { QueryErrorResponseFilter } from 'filter/queryErrorResponse.filter';
-import { CommonErrorResponseFilter } from 'filter/commonErrorResponse.filter';
-import { ValidationErrorResponseFilter } from 'filter/validationErrorResponse.filter';
+import { ApiCommonResponse } from '@App/decorator/apiCommon.decorator';
+import { ResponseFormatInterceptor } from '@App/interceptor/responseFormat.interceptor';
+import { QueryErrorResponseFilter } from '@App/filter/queryErrorResponse.filter';
+import { CommonErrorResponseFilter } from '@App/filter/commonErrorResponse.filter';
+import { ValidationErrorResponseFilter } from '@App/filter/validationErrorResponse.filter';
 
 @Controller('admin')
 @ApiTags('관리자 API')

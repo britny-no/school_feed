@@ -2,8 +2,8 @@ import { Expose, Transform, Exclude } from 'class-transformer';
 import { IsString, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { ErrorCodeEnum } from 'enum/errorCode.enum';
-import { DetailCodeEnum } from 'enum/detailCode.enum';
+import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
+import { DetailCodeEnum } from '@App/enum/detailCode.enum';
 
 @Exclude()
 export class CreatePageReqDto {
