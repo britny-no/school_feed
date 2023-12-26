@@ -5,6 +5,8 @@ import {
   Post,
   Query,
   Body,
+  Put,
+  Delete,
   UseInterceptors,
   UseFilters,
 } from '@nestjs/common';
@@ -23,6 +25,11 @@ import { AdminAuthGuard } from '@App/decorator/auth.decorator';
 import { CreatePageReqDto } from './dto/request/createPage.dto';
 import { CreatePageResDto } from './dto/response/createPage.dto';
 import { CreateNewsReqDto } from './dto/request/createNews.dto';
+import { CreateNewsResDto } from './dto/response/createNews.dto';
+import { ReviseNewsReqDto } from './dto/request/reviseNews.dto';
+import { ReviseNewsResDto } from './dto/response/reviseNews.dto';
+import { DeleteNewsReqDto } from './dto/request/deleteNews.dto';
+import { DeleteNewsResDto } from './dto/response/deleteNews.dto';
 
 import { ControllerResult } from '@App/interface/index.interface';
 
@@ -68,10 +75,10 @@ export class AdminController {
     summary: '소식 생성 API',
     description: '소식을 생성한다.',
   })
-  // @ApiExtraModels(CreatePageResDto)
-  // @ApiCommonResponse({
-  //   $ref: getSchemaPath(CreatePageResDto),
-  // })
+  @ApiExtraModels(CreateNewsResDto)
+  @ApiCommonResponse({
+    $ref: getSchemaPath(CreateNewsResDto),
+  })
   @Post('/news')
   @UseGuards(AdminAuthGuard)
   @UseFilters(
@@ -82,9 +89,63 @@ export class AdminController {
   @UseInterceptors(ResponseFormatInterceptor)
   async createNews(
     @Body() body: CreateNewsReqDto,
-  ): Promise<ControllerResult<CreatePageResDto>> {
+  ): Promise<ControllerResult<CreateNewsResDto>> {
     try {
       const data = await this.adminService.createNews(body);
+      return data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  @ApiOperation({
+    summary: '소식 수정 API',
+    description: '소식을 수정한다.',
+  })
+  @ApiExtraModels(ReviseNewsResDto)
+  @ApiCommonResponse({
+    $ref: getSchemaPath(ReviseNewsResDto),
+  })
+  @Put('/news')
+  @UseGuards(AdminAuthGuard)
+  @UseFilters(
+    ValidationErrorResponseFilter,
+    CommonErrorResponseFilter,
+    QueryErrorResponseFilter,
+  )
+  @UseInterceptors(ResponseFormatInterceptor)
+  async reviseNews(
+    @Body() body: ReviseNewsReqDto,
+  ): Promise<ControllerResult<ReviseNewsResDto>> {
+    try {
+      const data = await this.adminService.reviseNews(body);
+      return data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  @ApiOperation({
+    summary: '소식 삭제 API',
+    description: '소식을 삭제한다.',
+  })
+  @ApiExtraModels(DeleteNewsResDto)
+  @ApiCommonResponse({
+    $ref: getSchemaPath(DeleteNewsResDto),
+  })
+  @Delete('/news')
+  @UseGuards(AdminAuthGuard)
+  @UseFilters(
+    ValidationErrorResponseFilter,
+    CommonErrorResponseFilter,
+    QueryErrorResponseFilter,
+  )
+  @UseInterceptors(ResponseFormatInterceptor)
+  async deleteNews(
+    @Body() body: DeleteNewsReqDto,
+  ): Promise<ControllerResult<DeleteNewsResDto>> {
+    try {
+      const data = await this.adminService.deleteNews(body);
       return data;
     } catch (err) {
       throw err;

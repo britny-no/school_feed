@@ -6,6 +6,11 @@ import { NewsEntity } from '../entity/news.entity';
 import { SubscribeEntity } from '@App/module/student/entity/subscribe.entity';
 
 import { CreateNewsReqInterface } from '../interface/request/createNews.interface';
+import { ReviseNewsReqInterface } from '@App/module/news/interface/request/reviseNews.interface';
+import { ReviseNewsResInterface } from '@App/module/news/interface/response/reviseNews.interface';
+import { DeleteNewsReqInterface } from '@App/module/news/interface/request/deleteNews.interface';
+import { DeleteNewsResInterface } from '@App/module/news/interface/response/deleteNews.interface';
+
 import { DatabaseResult } from '@App/interface/index.interface';
 import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
 import { DetailCodeEnum } from '@App/enum/detailCode.enum';
@@ -50,6 +55,54 @@ export class NewsRepository extends Repository<NewsEntity> {
         default:
           throw new QueryErrorException(err);
       }
+    }
+  }
+
+  async reviseNews(
+    data: ReviseNewsReqInterface,
+  ): Promise<DatabaseResult<ReviseNewsResInterface>> {
+    try {
+      const updateResult = await this.update(
+        {
+          newsIndex: data.newsIndex,
+          pageIndex: data.pageIndex,
+        },
+        {
+          title: data.title,
+          contents: data.contents,
+        },
+      );
+
+      return {
+        data: null,
+        msg:
+          updateResult.affected === 1
+            ? '소식 수정 성공'
+            : '변경 사항이 없습니다',
+      };
+    } catch (err) {
+      throw new QueryErrorException(err);
+    }
+  }
+
+  async deleteNews(
+    data: DeleteNewsReqInterface,
+  ): Promise<DatabaseResult<DeleteNewsResInterface>> {
+    try {
+      const deleteResult = await this.delete({
+        newsIndex: data.newsIndex,
+        pageIndex: data.pageIndex,
+      });
+      console.log(deleteResult);
+      return {
+        data: null,
+        msg:
+          deleteResult.affected === 1
+            ? '소식 삭제 성공'
+            : '변경 사항이 없습니다',
+      };
+    } catch (err) {
+      throw new QueryErrorException(err);
     }
   }
 }

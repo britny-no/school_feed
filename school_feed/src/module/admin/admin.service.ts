@@ -10,6 +10,12 @@ import { SubscribeRepository } from '@App/module/student/repository/subscribe.re
 import { CreatePageReqInterface } from '@App/module/page/interface/request/createPage.interface';
 import { CreatePageResInterface } from '@App/module/page/interface/response/createPage.interface';
 import { CreateNewsReqInterface } from '@App/module/news/interface/request/createNews.interface';
+import { CreateNewsResInterface } from '@App/module/news/interface/response/createNews.interface';
+import { ReviseNewsReqInterface } from '@App/module/news/interface/request/reviseNews.interface';
+import { ReviseNewsResInterface } from '@App/module/news/interface/response/reviseNews.interface';
+import { DeleteNewsReqInterface } from '@App/module/news/interface/request/deleteNews.interface';
+import { DeleteNewsResInterface } from '@App/module/news/interface/response/deleteNews.interface';
+
 @Injectable()
 export class AdminService {
   constructor(
@@ -34,7 +40,7 @@ export class AdminService {
 
   async createNews(
     data: CreateNewsReqInterface,
-  ): Promise<ServiceResult<CreatePageResInterface>> {
+  ): Promise<ServiceResult<CreateNewsResInterface>> {
     try {
       // 패이지 관리자인지 확인
       await this.pageRepository.checkPageAuth(data.pageIndex, data.adminIndex);
@@ -60,6 +66,30 @@ export class AdminService {
         data: null,
         msg: '소식 등록 성공',
       };
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async reviseNews(
+    data: ReviseNewsReqInterface,
+  ): Promise<ServiceResult<ReviseNewsResInterface>> {
+    try {
+      // 패이지 관리자인지 확인
+      await this.pageRepository.checkPageAuth(data.pageIndex, data.adminIndex);
+      return await this.newsRepository.reviseNews(data);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async deleteNews(
+    data: DeleteNewsReqInterface,
+  ): Promise<ServiceResult<DeleteNewsResInterface>> {
+    try {
+      // 패이지 관리자인지 확인
+      await this.pageRepository.checkPageAuth(data.pageIndex, data.adminIndex);
+      return await this.newsRepository.deleteNews(data);
     } catch (err) {
       throw err;
     }
