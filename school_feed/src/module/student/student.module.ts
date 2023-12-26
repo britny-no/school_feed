@@ -8,7 +8,11 @@ import { StudentRepository } from '@App/module/student/repository/student.reposi
 import { SubscribeRepository } from './repository/subscribe.repository';
 @Module({
   imports: [
-    TypeOrmExModule.forCustomRepository([PageRepository, StudentRepository]),
+    TypeOrmExModule.forCustomRepository([
+      PageRepository,
+      StudentRepository,
+      SubscribeRepository,
+    ]),
   ],
   controllers: [StudentController],
   providers: [StudentService],

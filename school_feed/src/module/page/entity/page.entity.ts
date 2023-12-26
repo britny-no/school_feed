@@ -30,6 +30,6 @@ export class PageEntity extends BaseEntity {
   @CreateDateColumn({ type: 'timestamptz', name: 'create_date' })
   createDate: Date;
 
-  @OneToMany((type) => SubscribeEntity, (subscribe) => subscribe.pages)
-  subscribes!: SubscribeEntity[];
+  // @OneToMany((type) => SubscribeEntity, (subscribe) => subscribe.pages)
+  // subscribes!: SubscribeEntity[];
 }

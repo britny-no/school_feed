@@ -21,7 +21,7 @@ export class SubscribeEntity extends BaseEntity {
   @Column({ type: 'bigint', nullable: false, name: 'page_index' })
   pageIndex: string;
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', nullable: false, default: 1 })
   status: number;
 
   @UpdateDateColumn({ type: 'timestamptz', name: 'update_date' })
@@ -30,7 +30,6 @@ export class SubscribeEntity extends BaseEntity {
   @CreateDateColumn({ type: 'timestamptz', name: 'create_date' })
   createDate: Date;
 
-  @ManyToOne((type) => PageEntity, (page) => page.subscribes)
-  @JoinColumn({ referencedColumnName: 'pageIndex' })
-  pages!: PageEntity;
+  // @ManyToOne((type) => PageEntity, (page) => page.subscribes)
+  // pages!: PageEntity;
 }

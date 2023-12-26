@@ -1,4 +1,4 @@
-export interface createPageResInterface {
+export interface CreatePageResInterface {
   data: Record<string, string>;
   msg: string;
 }

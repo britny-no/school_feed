@@ -5,8 +5,8 @@ import { RmqService } from '@App/module/rmq/rmq.service';
 import { PageRepository } from '@App/module/page/repository/page.repository';
 import { AdminRepository } from '@App/module/admin/repository/admin.repository';
 
-import { createPageReqInterface } from '@App/module/page/interface/request/createPage.interface';
-import { createPageResInterface } from '@App/module/page/interface/response/createPage.interface';
+import { CreatePageReqInterface } from '@App/module/page/interface/request/createPage.interface';
+import { CreatePageResInterface } from '@App/module/page/interface/response/createPage.interface';
 @Injectable()
 export class AdminService {
   constructor(
@@ -16,8 +16,8 @@ export class AdminService {
   ) {}
 
   async createPage(
-    data: createPageReqInterface,
-  ): Promise<ServiceResult<createPageResInterface>> {
+    data: CreatePageReqInterface,
+  ): Promise<ServiceResult<CreatePageResInterface>> {
     try {
       // 로그인 과정이 없기에, 등록된 유저인지 확인
       await this.adminRepository.checkUser(data.adminIndex);
