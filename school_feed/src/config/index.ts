@@ -30,7 +30,7 @@ export const DbConfig = TypeOrmModule.forRootAsync({
       StudentEntity,
       SubscribeEntity,
     ],
-    synchronize: false,
+    synchronize: true,
     migrationsRun: false,
   }),
 });

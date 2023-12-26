@@ -29,7 +29,7 @@ export class QueryErrorResponseFilter implements ExceptionFilter {
     const responseData = {};
     const route = `${request.method} - ${request.url}`;
 
-    this.logger.error(route, exception.getResponse());
+    this.logger.error(route + '  DB_QUERY_ERR', exception.getResponse());
 
     responseData['res_data'] = {
       error_code: 'DB_QUERY_ERR',

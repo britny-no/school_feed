@@ -5,8 +5,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
+import { PageEntity } from '@App/module/page/entity/page.entity';
 @Entity({ name: 'SUBSCRIBE' })
 export class SubscribeEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'subscribe_index' })
@@ -26,4 +29,8 @@ export class SubscribeEntity extends BaseEntity {
 
   @CreateDateColumn({ type: 'timestamptz', name: 'create_date' })
   createDate: Date;
+
+  @ManyToOne((type) => PageEntity, (page) => page.subscribes)
+  @JoinColumn({ referencedColumnName: 'pageIndex' })
+  pages!: PageEntity;
 }

@@ -6,9 +6,11 @@ import { RmqModule } from '../rmq/rmq.module';
 
 import { TypeOrmExModule } from '@App/module/typeorm/typeorm.module';
 import { PageRepository } from '../page/repository/page.repository';
+import { AdminRepository } from '@App/module/admin/repository/admin.repository';
+
 @Module({
   imports: [
-    TypeOrmExModule.forCustomRepository([PageRepository]),
+    TypeOrmExModule.forCustomRepository([PageRepository, AdminRepository]),
     RmqModule,
     PageModule,
   ],

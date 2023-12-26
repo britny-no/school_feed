@@ -7,6 +7,28 @@ import { DetailCodeEnum } from '@App/enum/detailCode.enum';
 
 @Exclude()
 export class CreatePageReqDto {
+  @ApiProperty({
+    name: 'admin_index',
+    description: '어드민 인덱스(실제 배포시에는 헤더에 암호화 시켜서)',
+    required: true,
+  })
+  @Expose({ name: 'admin_index' })
+  @IsString({
+    context: {
+      errorCode: ErrorCodeEnum.INVALID_DATA_TYPE,
+      detailCode: DetailCodeEnum.NOT_A_STRING,
+      field: 'admin_index',
+    },
+  })
+  @IsNotEmpty({
+    context: {
+      errorCode: ErrorCodeEnum.DATA_NOT_EXISTS,
+      detailCode: DetailCodeEnum.REQUEST_DATA_NOT_EXIST,
+      field: 'admin_index',
+    },
+  })
+  adminIndex: string;
+
   @ApiProperty({ name: 'page_name', description: '페이지명', required: true })
   @Expose({ name: 'page_name' })
   @IsString({

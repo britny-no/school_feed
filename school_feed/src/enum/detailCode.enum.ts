@@ -4,6 +4,8 @@ export enum DetailCodeEnum {
 
   DATA_DUPLICATE = 'DATA_DUPLICATE',
 
+  NO_USER = 'NO_USER',
+
   // 401
   TOKEN_MISMATCH = 'TOKEN_MISMATCH',
 

@@ -54,7 +54,6 @@ export class AdminController {
   async createPage(
     @Body() body: CreatePageReqDto,
   ): Promise<ControllerResult<CreatePageResDto>> {
-    // this.RmqService.sendMsg('123123');
     try {
       const data = await this.adminService.createPage(body);
       return data;

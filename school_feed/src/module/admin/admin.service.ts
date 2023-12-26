@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ServiceResult } from '../../interface/index.interface';
 import { RmqService } from '@App/module/rmq/rmq.service';
 import { PageRepository } from '@App/module/page/repository/page.repository';
+import { AdminRepository } from '@App/module/admin/repository/admin.repository';
 
 import { createPageReqInterface } from '@App/module/page/interface/request/createPage.interface';
 import { createPageResInterface } from '@App/module/page/interface/response/createPage.interface';
@@ -10,14 +11,17 @@ import { createPageResInterface } from '@App/module/page/interface/response/crea
 export class AdminService {
   constructor(
     private rmqService: RmqService,
-    private PageRepository: PageRepository,
+    private pageRepository: PageRepository,
+    private adminRepository: AdminRepository,
   ) {}
 
   async createPage(
     data: createPageReqInterface,
   ): Promise<ServiceResult<createPageResInterface>> {
     try {
-      return await this.PageRepository.createPage(data);
+      // 로그인 과정이 없기에, 등록된 유저인지 확인
+      await this.adminRepository.checkUser(data.adminIndex);
+      return await this.pageRepository.createPage(data);
     } catch (err) {
       throw err;
     }

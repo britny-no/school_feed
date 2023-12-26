@@ -38,7 +38,7 @@ export class StudentAuthGuard implements CanActivate {
 
     // 약속된 키값으로 올리면 인증
     // 실 개발시 복호화 가능한 방식으로 암호화한 jwt 유효성 검증
-    if (authorization && authorization === process.env.AUTH_ADMIN) {
+    if (authorization && authorization === process.env.AUTH_STUDENT) {
       return true;
     } else {
       throw new CommonErrorException(

@@ -9,7 +9,7 @@ import {
 @Entity({ name: 'STUDENT' })
 export class StudentEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'student_index' })
-  adminIndex: string;
+  studentIndex: string;
 
   @Column({ type: 'text', nullable: false })
   id: string;

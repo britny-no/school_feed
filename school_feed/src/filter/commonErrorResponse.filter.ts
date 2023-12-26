@@ -33,7 +33,13 @@ export class CommonErrorResponseFilter implements ExceptionFilter {
       delete error['detailCode'];
     }
 
-    this.logger.error(route, { ...request.body, ...request.query }, error);
+    this.logger.error(
+      `${route} ${error['error_code']} ${error['detail_code']} `,
+      {
+        ...request.body,
+        ...request.query,
+      },
+    );
 
     responseData['res_data'] = error;
     responseData['route'] = route;

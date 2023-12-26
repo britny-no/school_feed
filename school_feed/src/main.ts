@@ -7,8 +7,8 @@ import {
   ValidationError,
 } from '@nestjs/common';
 
-import { ValidationFailException } from 'exception/validationFail.exception';
-import { setupSwagger } from 'util/swagger.util';
+import { ValidationFailException } from '@App/exception/validationFail.exception';
+import { setupSwagger } from '@App/util/swagger.util';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
