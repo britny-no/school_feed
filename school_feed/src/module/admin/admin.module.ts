@@ -7,10 +7,17 @@ import { RmqModule } from '../rmq/rmq.module';
 import { TypeOrmExModule } from '@App/module/typeorm/typeorm.module';
 import { PageRepository } from '../page/repository/page.repository';
 import { AdminRepository } from '@App/module/admin/repository/admin.repository';
+import { NewsRepository } from '@App/module/news/repository/news.repository';
+import { SubscribeRepository } from '@App/module/student/repository/subscribe.repository';
 
 @Module({
   imports: [
-    TypeOrmExModule.forCustomRepository([PageRepository, AdminRepository]),
+    TypeOrmExModule.forCustomRepository([
+      PageRepository,
+      AdminRepository,
+      NewsRepository,
+      SubscribeRepository,
+    ]),
     RmqModule,
     PageModule,
   ],

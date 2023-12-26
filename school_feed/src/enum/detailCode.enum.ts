@@ -6,6 +6,7 @@ export enum DetailCodeEnum {
 
   NO_USER = 'NO_USER',
   NO_PAGE = 'NO_PAGE',
+  NO_AUTH = 'NO_AUTH',
   DUPLICATE_REQUEST = 'DUPLICATE_REQUEST',
 
   // 401
@@ -13,4 +14,7 @@ export enum DetailCodeEnum {
 
   //404
   REQUEST_DATA_NOT_EXIST = 'REQUEST_DATA_NOT_EXIST',
+
+  //505
+  INSERT_ERROR = 'INSERT_ERROR',
 }

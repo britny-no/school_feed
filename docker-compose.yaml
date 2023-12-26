@@ -57,6 +57,7 @@ services:
       - -c
       - |
         /school_feed/wait-for-it.sh postgres_container:5432 -t 10
+        /school_feed/wait-for-it.sh rabbitmq:5672 -t 10
         npm run start:prod
   pub-server:
     networks:
@@ -75,6 +76,7 @@ services:
       - -c
       - |
         /pub_server/wait-for-it.sh rabbitmq:5672 -t 10
+        /pub_server/wait-for-it.sh postgres_container:5432 -t 10
         node dist/server.js
 
   rabbitmq:

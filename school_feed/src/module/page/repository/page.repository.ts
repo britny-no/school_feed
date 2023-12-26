@@ -45,6 +45,32 @@ export class PageRepository extends Repository<PageEntity> {
     }
   }
 
+  async checkPageAuth(pageIndex: string, adminIndex: string) {
+    try {
+      const selectResult = await this.findOne({
+        where: { pageIndex, adminIndex },
+      });
+      if (!selectResult) {
+        throw { code: 'NO_AUTH' };
+      }
+
+      return true;
+    } catch (err) {
+      switch (err.code) {
+        case 'NO_AUTH':
+          throw new CommonErrorException(
+            {
+              errorCode: ErrorCodeEnum.INVALID_DATA,
+              detailCode: DetailCodeEnum.NO_AUTH,
+            },
+            403,
+          );
+        default:
+          throw new QueryErrorException(err);
+      }
+    }
+  }
+
   async createPage(
     data: CreatePageReqInterface,
   ): Promise<DatabaseResult<CreatePageResInterface>> {

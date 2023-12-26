@@ -8,4 +8,7 @@ export enum ErrorCodeEnum {
 
   //404 Not Found
   DATA_NOT_EXISTS = 'DATA_NOT_EXISTS',
+
+  //500 SERVER ERROR
+  SERVER_ERROR = 'SERVER_ERROR',
 }

@@ -17,12 +17,14 @@ import {
   getSchemaPath,
 } from '@nestjs/swagger';
 
+import { AdminService } from '@App/module/admin/admin.service';
+
 import { AdminAuthGuard } from '@App/decorator/auth.decorator';
 import { CreatePageReqDto } from './dto/request/createPage.dto';
 import { CreatePageResDto } from './dto/response/createPage.dto';
-import { AdminService } from '@App/module/admin/admin.service';
+import { CreateNewsReqDto } from './dto/request/createNews.dto';
 
-import { ControllerResult } from '../../interface/index.interface';
+import { ControllerResult } from '@App/interface/index.interface';
 
 import { ApiCommonResponse } from '@App/decorator/apiCommon.decorator';
 import { ResponseFormatInterceptor } from '@App/interceptor/responseFormat.interceptor';
@@ -56,6 +58,33 @@ export class AdminController {
   ): Promise<ControllerResult<CreatePageResDto>> {
     try {
       const data = await this.adminService.createPage(body);
+      return data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  @ApiOperation({
+    summary: '소식 생성 API',
+    description: '소식을 생성한다.',
+  })
+  // @ApiExtraModels(CreatePageResDto)
+  // @ApiCommonResponse({
+  //   $ref: getSchemaPath(CreatePageResDto),
+  // })
+  @Post('/news')
+  @UseGuards(AdminAuthGuard)
+  @UseFilters(
+    ValidationErrorResponseFilter,
+    CommonErrorResponseFilter,
+    QueryErrorResponseFilter,
+  )
+  @UseInterceptors(ResponseFormatInterceptor)
+  async createNews(
+    @Body() body: CreateNewsReqDto,
+  ): Promise<ControllerResult<CreatePageResDto>> {
+    try {
+      const data = await this.adminService.createNews(body);
       return data;
     } catch (err) {
       throw err;

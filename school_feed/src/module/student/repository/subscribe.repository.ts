@@ -89,4 +89,16 @@ export class SubscribeRepository extends Repository<SubscribeEntity> {
       throw new QueryErrorException(err);
     }
   }
+
+  async getSubscribers(pageIndex: string) {
+    try {
+      const selectResult = await this.find({
+        where: { pageIndex, status: 1 },
+      });
+
+      return selectResult;
+    } catch (err) {
+      throw new QueryErrorException(err);
+    }
+  }
 }
