@@ -1,6 +1,8 @@
 export enum DetailCodeEnum {
   // 400
   NOT_A_STRING = 'NOT_A_STRING',
+  NOT_A_NUMBER = 'NOT_A_NUMBER',
+  NO_SUBSCRIBE = 'NO_SUBSCRIBE',
 
   DATA_DUPLICATE = 'DATA_DUPLICATE',
 

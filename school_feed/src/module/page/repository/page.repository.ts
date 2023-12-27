@@ -11,7 +11,6 @@ import { CreatePageResInterface } from '../interface/response/createPage.interfa
 import { GetPagesReqInterface } from '@App/module/page/interface/request/getPages.interface';
 import { GetPagesResInterface } from '@App/module/page/interface/response/getPages.interface';
 
-import { DatabaseResult } from '@App/interface/index.interface';
 import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
 import { DetailCodeEnum } from '@App/enum/detailCode.enum';
 import { CommonErrorException } from '@App/exception/commonError.exception';
@@ -73,7 +72,7 @@ export class PageRepository extends Repository<PageEntity> {
 
   async createPage(
     data: CreatePageReqInterface,
-  ): Promise<DatabaseResult<CreatePageResInterface>> {
+  ): Promise<CreatePageResInterface> {
     try {
       await this.insert(data);
 
@@ -99,7 +98,7 @@ export class PageRepository extends Repository<PageEntity> {
 
   async getNonSubscribePages(
     data: GetPagesReqInterface,
-  ): Promise<DatabaseResult<GetPagesResInterface>> {
+  ): Promise<GetPagesResInterface> {
     try {
       const db = this.manager;
       const selectResult = await db.query(

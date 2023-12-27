@@ -4,7 +4,6 @@ import { CustomRepository } from '@App/decorator/typeormEx.decorator';
 
 import { StudentEntity } from '@App/module/student/entity/student.entity';
 
-import { DatabaseResult } from '@App/interface/index.interface';
 import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
 import { DetailCodeEnum } from '@App/enum/detailCode.enum';
 import { CommonErrorException } from '@App/exception/commonError.exception';

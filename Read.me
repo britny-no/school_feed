@@ -1,3 +1,6 @@
 [실행 순서]
 0. /school_feed/.env, /pub_server/.env,  ./docker.env 설정
-1. docker-compose -f docker-compose.dev.yaml up
+1. docker-compose -f docker-compose.yaml up --build
+
+*피드 발행이 안되면 도커 정보를 모두 리셋햇다가, 다시 빌드해주세요
+

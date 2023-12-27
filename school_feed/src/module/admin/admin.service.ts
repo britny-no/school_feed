@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 
-import { ServiceResult } from '@App/interface/index.interface';
 import { RmqService } from '@App/module/rmq/rmq.service';
 import { PageRepository } from '@App/module/page/repository/page.repository';
 import { AdminRepository } from '@App/module/admin/repository/admin.repository';
@@ -28,7 +27,7 @@ export class AdminService {
 
   async createPage(
     data: CreatePageReqInterface,
-  ): Promise<ServiceResult<CreatePageResInterface>> {
+  ): Promise<CreatePageResInterface> {
     try {
       // 로그인 과정이 없기에, 등록된 유저인지 확인
       await this.adminRepository.checkUser(data.adminIndex);
@@ -40,7 +39,7 @@ export class AdminService {
 
   async createNews(
     data: CreateNewsReqInterface,
-  ): Promise<ServiceResult<CreateNewsResInterface>> {
+  ): Promise<CreateNewsResInterface> {
     try {
       // 패이지 관리자인지 확인
       await this.pageRepository.checkPageAuth(data.pageIndex, data.adminIndex);
@@ -73,7 +72,7 @@ export class AdminService {
 
   async reviseNews(
     data: ReviseNewsReqInterface,
-  ): Promise<ServiceResult<ReviseNewsResInterface>> {
+  ): Promise<ReviseNewsResInterface> {
     try {
       // 패이지 관리자인지 확인
       await this.pageRepository.checkPageAuth(data.pageIndex, data.adminIndex);
@@ -85,7 +84,7 @@ export class AdminService {
 
   async deleteNews(
     data: DeleteNewsReqInterface,
-  ): Promise<ServiceResult<DeleteNewsResInterface>> {
+  ): Promise<DeleteNewsResInterface> {
     try {
       // 패이지 관리자인지 확인
       await this.pageRepository.checkPageAuth(data.pageIndex, data.adminIndex);

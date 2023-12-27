@@ -74,7 +74,6 @@ export class RmqService {
 
   async sendMsg(msg: string): Promise<void> {
     const que = this.configService.get<string>('RMQ_QUE');
-    console.log('quw', que);
     if (this.channelConnected && this.connected) {
       this.channel.assertQueue(que, {
         durable: false,

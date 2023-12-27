@@ -58,7 +58,7 @@ const insertFeed = async (
       // console.log(res);
     })
     .catch(async (e) => {
-      // console.log(e);
+      console.log(e);
       await fileSaver(
         "/pub_server/pending.txt",
         JSON.stringify({

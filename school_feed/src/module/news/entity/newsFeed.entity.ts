@@ -5,7 +5,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { NewsEntity } from './news.entity';
 
 @Entity({ name: 'NEWS_FEED' })
 export class NewsFeedEntity extends BaseEntity {
@@ -26,4 +29,8 @@ export class NewsFeedEntity extends BaseEntity {
 
   @CreateDateColumn({ type: 'timestamptz', name: 'create_date' })
   createDate: Date;
+
+  @ManyToOne((type) => NewsEntity, (news) => news.feeds)
+  @JoinColumn({ name: 'news_index' })
+  news!: NewsEntity;
 }

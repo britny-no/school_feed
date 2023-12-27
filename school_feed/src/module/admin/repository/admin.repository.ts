@@ -7,8 +7,6 @@ import { SubscribeEntity } from '@App/module/student/entity/subscribe.entity';
 
 // import { createPageReqInterface } from '../interface/request/createPage.interface';
 // import { createPageResInterface } from '../interface/response/createPage.interface';
-
-import { DatabaseResult } from '@App/interface/index.interface';
 import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
 import { DetailCodeEnum } from '@App/enum/detailCode.enum';
 import { CommonErrorException } from '@App/exception/commonError.exception';

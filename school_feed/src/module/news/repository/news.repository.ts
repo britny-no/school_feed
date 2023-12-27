@@ -11,7 +11,6 @@ import { ReviseNewsResInterface } from '@App/module/news/interface/response/revi
 import { DeleteNewsReqInterface } from '@App/module/news/interface/request/deleteNews.interface';
 import { DeleteNewsResInterface } from '@App/module/news/interface/response/deleteNews.interface';
 
-import { DatabaseResult } from '@App/interface/index.interface';
 import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
 import { DetailCodeEnum } from '@App/enum/detailCode.enum';
 import { CommonErrorException } from '@App/exception/commonError.exception';
@@ -60,7 +59,7 @@ export class NewsRepository extends Repository<NewsEntity> {
 
   async reviseNews(
     data: ReviseNewsReqInterface,
-  ): Promise<DatabaseResult<ReviseNewsResInterface>> {
+  ): Promise<ReviseNewsResInterface> {
     try {
       const updateResult = await this.update(
         {
@@ -87,13 +86,13 @@ export class NewsRepository extends Repository<NewsEntity> {
 
   async deleteNews(
     data: DeleteNewsReqInterface,
-  ): Promise<DatabaseResult<DeleteNewsResInterface>> {
+  ): Promise<DeleteNewsResInterface> {
     try {
       const deleteResult = await this.delete({
         newsIndex: data.newsIndex,
         pageIndex: data.pageIndex,
       });
-      console.log(deleteResult);
+
       return {
         data: null,
         msg:

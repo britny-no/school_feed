@@ -31,8 +31,6 @@ import { ReviseNewsResDto } from './dto/response/reviseNews.dto';
 import { DeleteNewsReqDto } from './dto/request/deleteNews.dto';
 import { DeleteNewsResDto } from './dto/response/deleteNews.dto';
 
-import { ControllerResult } from '@App/interface/index.interface';
-
 import { ApiCommonResponse } from '@App/decorator/apiCommon.decorator';
 import { ResponseFormatInterceptor } from '@App/interceptor/responseFormat.interceptor';
 import { QueryErrorResponseFilter } from '@App/filter/queryErrorResponse.filter';
@@ -60,9 +58,7 @@ export class AdminController {
     QueryErrorResponseFilter,
   )
   @UseInterceptors(ResponseFormatInterceptor)
-  async createPage(
-    @Body() body: CreatePageReqDto,
-  ): Promise<ControllerResult<CreatePageResDto>> {
+  async createPage(@Body() body: CreatePageReqDto): Promise<CreatePageResDto> {
     try {
       const data = await this.adminService.createPage(body);
       return data;
@@ -87,9 +83,7 @@ export class AdminController {
     QueryErrorResponseFilter,
   )
   @UseInterceptors(ResponseFormatInterceptor)
-  async createNews(
-    @Body() body: CreateNewsReqDto,
-  ): Promise<ControllerResult<CreateNewsResDto>> {
+  async createNews(@Body() body: CreateNewsReqDto): Promise<CreateNewsResDto> {
     try {
       const data = await this.adminService.createNews(body);
       return data;
@@ -114,9 +108,7 @@ export class AdminController {
     QueryErrorResponseFilter,
   )
   @UseInterceptors(ResponseFormatInterceptor)
-  async reviseNews(
-    @Body() body: ReviseNewsReqDto,
-  ): Promise<ControllerResult<ReviseNewsResDto>> {
+  async reviseNews(@Body() body: ReviseNewsReqDto): Promise<ReviseNewsResDto> {
     try {
       const data = await this.adminService.reviseNews(body);
       return data;
@@ -141,9 +133,7 @@ export class AdminController {
     QueryErrorResponseFilter,
   )
   @UseInterceptors(ResponseFormatInterceptor)
-  async deleteNews(
-    @Body() body: DeleteNewsReqDto,
-  ): Promise<ControllerResult<DeleteNewsResDto>> {
+  async deleteNews(@Body() body: DeleteNewsReqDto): Promise<DeleteNewsResDto> {
     try {
       const data = await this.adminService.deleteNews(body);
       return data;

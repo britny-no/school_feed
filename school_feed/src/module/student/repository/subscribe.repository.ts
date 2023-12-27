@@ -6,9 +6,11 @@ import { SubscribePageReqInterface } from '@App/module/student/interface/request
 import { SubscribePageResInterface } from '@App/module/student/interface/response/subscribePage.interface';
 import { GetSubscribePagesReqInterface } from '@App/module/student/interface/request/getSubscribePages.interface';
 import { GetSubscribePagesResInterface } from '@App/module/student/interface/response/getSubscribePages.interface';
+import { UnLockSubscribePageReqInterface } from '@App/module/student/interface/request/unLockSubscribePage.interface';
+import { UnLockSubscribePageResInterface } from '@App/module/student/interface/response/unLockSubscribePage.interface';
 
 import { SubscribeEntity } from '@App/module/student/entity/subscribe.entity';
-import { DatabaseResult } from '@App/interface/index.interface';
+
 import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
 import { DetailCodeEnum } from '@App/enum/detailCode.enum';
 import { CommonErrorException } from '@App/exception/commonError.exception';
@@ -31,9 +33,23 @@ export class SubscribeRepository extends Repository<SubscribeEntity> {
     }
   }
 
+  private async checkUnLockSubscribePossible(
+    data: UnLockSubscribePageReqInterface,
+  ): Promise<{ code: string }> {
+    try {
+      const selectResult = await this.findOne({
+        where: data,
+      });
+      if (!selectResult) return { code: 'NO_SUBSCRIBE' };
+      return { code: 'PASS' };
+    } catch (err) {
+      return { code: 'DB_ERR', ...err };
+    }
+  }
+
   async subscribePage(
     data: SubscribePageReqInterface,
-  ): Promise<DatabaseResult<SubscribePageResInterface>> {
+  ): Promise<SubscribePageResInterface> {
     try {
       const subscribeAvailability = await this.checkSubscribePossible(data);
       switch (subscribeAvailability.code) {
@@ -66,7 +82,7 @@ export class SubscribeRepository extends Repository<SubscribeEntity> {
 
   async getSubscribePages(
     data: GetSubscribePagesReqInterface,
-  ): Promise<DatabaseResult<GetSubscribePagesResInterface>> {
+  ): Promise<GetSubscribePagesResInterface> {
     try {
       const db = this.manager;
       const selectResult = await db.query(
@@ -99,6 +115,40 @@ export class SubscribeRepository extends Repository<SubscribeEntity> {
       return selectResult;
     } catch (err) {
       throw new QueryErrorException(err);
+    }
+  }
+
+  async unLockSubscribePage(
+    data: UnLockSubscribePageReqInterface,
+  ): Promise<UnLockSubscribePageResInterface> {
+    try {
+      const unLockSubscribeAvailability =
+        await this.checkUnLockSubscribePossible(data);
+      switch (unLockSubscribeAvailability.code) {
+        case 'NO_SUBSCRIBE':
+        case 'DB_ERR':
+          throw unLockSubscribeAvailability;
+        default:
+          await this.delete(data);
+      }
+
+      return {
+        data: null,
+        msg: '구독 해제 완료',
+      };
+    } catch (err) {
+      switch (err.code) {
+        case 'NO_SUBSCRIBE':
+          throw new CommonErrorException(
+            {
+              errorCode: ErrorCodeEnum.INVALID_DATA,
+              detailCode: DetailCodeEnum.NO_SUBSCRIBE,
+            },
+            403,
+          );
+        default:
+          throw new QueryErrorException(err);
+      }
     }
   }
 }
