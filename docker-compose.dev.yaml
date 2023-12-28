@@ -51,18 +51,20 @@ services:
       - "3000:3000" # Adjust the port as needed
     volumes:
       - ./school_feed:/school_feed
-      - /school_feed/node_modules/
+      # - /school_feed/node_modules/
     command:
       - bash
       - -c
       - |
         /school_feed/wait-for-it.sh postgres_container:5432 -t 10
+        /school_feed/wait-for-it.sh rabbitmq:5672 -t 10
         npm run start:debug
 
   pub-server:
     networks:
       - postgres
     depends_on:
+      - postgres
       - rabbitmq
     build:
       context: ./pub_server
@@ -75,8 +77,9 @@ services:
       - bash
       - -c
       - |
-        /pub_server/wait-for-it.sh rabbitmq:5672 -t 10
-        ts-node ./src/server.ts
+        /pub_server/wait-for-it.sh rabbitmq:5672 -t 10  
+        /pub_server/wait-for-it.sh postgres_container:5432 -t 10
+        nodemon -L --watch src --exec ts-node /pub_server/src/server.ts
 
   rabbitmq:
     networks:
