@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 import { PageModule } from '@App/module/page/page.module';
-import { RmqModule } from '../rmq/rmq.module';
+import { RmqModule } from '@App/module/rmq/rmq.module';
 
 import { TypeOrmExModule } from '@App/module/typeorm/typeorm.module';
-import { PageRepository } from '../page/repository/page.repository';
+import { PageRepository } from '@App/module/page/repository/page.repository';
 import { AdminRepository } from '@App/module/admin/repository/admin.repository';
 import { NewsRepository } from '@App/module/news/repository/news.repository';
 import { SubscribeRepository } from '@App/module/student/repository/subscribe.repository';

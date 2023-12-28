@@ -3,10 +3,7 @@ import { Repository, DataSource } from 'typeorm';
 import { CustomRepository } from '@App/decorator/typeormEx.decorator';
 
 import { AdminEntity } from '@App/module/admin/entity/admin.entity';
-import { SubscribeEntity } from '@App/module/student/entity/subscribe.entity';
 
-// import { createPageReqInterface } from '../interface/request/createPage.interface';
-// import { createPageResInterface } from '../interface/response/createPage.interface';
 import { ErrorCodeEnum } from '@App/enum/errorCode.enum';
 import { DetailCodeEnum } from '@App/enum/detailCode.enum';
 import { CommonErrorException } from '@App/exception/commonError.exception';
