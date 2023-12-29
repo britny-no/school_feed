@@ -3,11 +3,9 @@ import { Repository, DataSource } from 'typeorm';
 import { CustomRepository } from '@App/decorator/typeormEx.decorator';
 
 import { PageEntity } from '../entity/page.entity';
-import { SubscribeEntity } from '@App/module/student/entity/subscribe.entity';
 
 import { CreatePageReqInterface } from '../interface/request/createPage.interface';
 import { CreatePageResInterface } from '../interface/response/createPage.interface';
-
 import { GetPagesReqInterface } from '@App/module/page/interface/request/getPages.interface';
 import { GetPagesResInterface } from '@App/module/page/interface/response/getPages.interface';
 
