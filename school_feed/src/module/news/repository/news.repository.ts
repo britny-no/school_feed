@@ -3,9 +3,8 @@ import { Repository, DataSource } from 'typeorm';
 import { CustomRepository } from '@App/decorator/typeormEx.decorator';
 
 import { NewsEntity } from '../entity/news.entity';
-import { SubscribeEntity } from '@App/module/student/entity/subscribe.entity';
 
-import { CreateNewsReqInterface } from '../interface/request/createNews.interface';
+import { CreateNewsReqInterface } from '@App/module/news/interface/request/createNews.interface';
 import { ReviseNewsReqInterface } from '@App/module/news/interface/request/reviseNews.interface';
 import { ReviseNewsResInterface } from '@App/module/news/interface/response/reviseNews.interface';
 import { DeleteNewsReqInterface } from '@App/module/news/interface/request/deleteNews.interface';

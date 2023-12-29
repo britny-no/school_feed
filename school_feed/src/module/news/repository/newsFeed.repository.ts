@@ -2,8 +2,7 @@ import { UseFilters } from '@nestjs/common';
 import { Repository, DataSource } from 'typeorm';
 import { CustomRepository } from '@App/decorator/typeormEx.decorator';
 
-import { NewsEntity } from '../entity/news.entity';
-import { NewsFeedEntity } from '../entity/newsFeed.entity';
+import { NewsFeedEntity } from '@App/module/news/entity/newsFeed.entity';
 
 import { GetNewsFeedReqInterface } from '@App/module/news/interface/request/getNewsFeed.interface';
 import { GetNewsFeedResInterface } from '@App/module/news/interface/response/getNewsFeed.interface';

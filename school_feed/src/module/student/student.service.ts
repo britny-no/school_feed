@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 
 import { GetPagesReqInterface } from '@App/module/page/interface/request/getPages.interface';
 import { GetPagesResInterface } from '@App/module/page/interface/response/getPages.interface';
-
 import { GetSubscribePagesReqInterface } from './interface/request/getSubscribePages.interface';
 import { GetSubscribePagesResInterface } from './interface/response/getSubscribePages.interface';
 import { SubscribePageReqInterface } from './interface/request/subscribePage.interface';
